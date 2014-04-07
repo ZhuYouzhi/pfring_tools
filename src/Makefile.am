@@ -1,0 +1,9 @@
+bin_PROGRAMS = pftest pfsynbench pfudpbench pfdnsbench pficmpbench pftcpdump
+AM_CFLAGS = -Wall -Werror -O3 -D _BSD_SOURCE
+AM_LDFLAGS = -lpfring -lpcap
+pftest_SOURCES = pftest.c
+pfsynbench_SOURCES = pfsynbench.c
+pfudpbench_SOURCES = pfudpbench.c
+pfdnsbench_SOURCES = pfdnsbench.c
+pficmpbench_SOURCES = pficmpbench.c
+pftcpdump_SOURCES = pftcpdump.c

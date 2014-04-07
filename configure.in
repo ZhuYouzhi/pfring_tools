@@ -1,0 +1,44 @@
+AC_INIT(src/pfsynbench.c)
+AM_INIT_AUTOMAKE(pfring_tools, 0.1)
+# Checks for programs.
+if test -z $CFLAGS; then
+  CFLAGS=''
+fi
+
+AC_ARG_WITH(pfring,
+[  --with-pfring=PATH        Specify path to pfring library.],
+    [
+	AC_MSG_CHECKING(for --with-pfring option)
+	case "$withval" in
+	  yes|no)
+	    AC_MSG_ERROR(PATH required with pfring option)
+	    ;;
+	  *)
+	    if test '!' -d "$withval"; then
+		AC_MSG_ERROR($withval does not exist!)
+	    else
+		AC_MSG_RESULT($withval)
+		if test -d "$withval/include"; then
+		  CFLAGS="$CFLAGS -I$withval/include"
+		  CPPFLAGS="$CPPFLAGS -I$withval/include"
+		else
+		  CFLAGS="$CFLAGS -I$withval"
+		  CPPFLAGS="$CPPFLAGS -I$withval"
+		fi
+	        if test -d "$withval/lib"; then
+		  LIBS="$LIBS -L$withval/lib"
+		else
+		  LIBS="$LIBS -L$withval"
+		fi
+	    fi
+	    ;;
+	  esac
+    ]
+)
+
+AC_PROG_CC
+# Checks for libraries.
+# Checks for header files.
+# Checks for typedefs, structures, and compiler characteristics.
+# Checks for library functions.
+AC_OUTPUT(Makefile src/Makefile)
